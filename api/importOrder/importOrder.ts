@@ -1,4 +1,4 @@
-import { Shoes } from "../shoes/shoes";
+import { Shoes } from "../watch/watch";
 import { User } from "../user/user";
 
 interface ImportOrderDetail {

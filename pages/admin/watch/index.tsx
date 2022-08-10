@@ -12,39 +12,32 @@ import LaunchOutlinedIcon from "@mui/icons-material/LaunchOutlined";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import useCustomPagination from "../../../components/CustomPagination/hooks/useCustomPagination";
-import getAllShoesRequest from "../../../api/shoes/getAllShoesRequest";
+import getAllWatchRequest from "../../../api/watch/getAllWatchRequest";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { SHOESMARK_API_DOMAIN } from "../../../config/domain";
 import dayjs from "dayjs";
-import deleteManyShoesRequest from "../../../api/shoes/deleteManyShoesRequest";
+import deleteManyWatchRequest from "../../../api/watch/deleteManyWatchRequest";
 import { useSnackbar } from "notistack";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Autocomplete from "@mui/material/Autocomplete";
 import getAllCategoryRequest from "../../../api/category/getAllCategoryRequest";
-import getAllColorRequest, { GetAllColorQueryKey } from "../../../api/color/getAllColorRequest";
 
 const columns: GridColDef[] = [
     {
-        field: "shoesName",
+        field: "watchName",
         headerName: "Tên giày",
         width: 250
     },
     {
-        field: "shoesImage",
+        field: "watchImage",
         headerName: "Ảnh giày",
         width: 100,
         renderCell: (params: GridRenderCellParams<string>) => (
             <Image width={150} height={150} src={SHOESMARK_API_DOMAIN + "/" + params.value}></Image>
         )
-    },
-    {
-        field: "size",
-        headerName: "Cỡ",
-        width: 50,
-        align: "center"
     },
     {
         field: "quantity",
@@ -89,46 +82,43 @@ const columns: GridColDef[] = [
     }
 ]
 
-interface ShoesFormInputs {
-    shoesName: string
+interface WatchFormInputs {
+    watchName: string
     categoryIds: string[]
-    colorId: string
 }
 
-const ShoesPage: CustomNextPage = () => {
+const WatchPage: CustomNextPage = () => {
     const session = useSession();
     const router = useRouter();
     const { enqueueSnackbar } = useSnackbar();
 
 
-    const searchForm = useForm<ShoesFormInputs>({
+    const searchForm = useForm<WatchFormInputs>({
         defaultValues: {
-            shoesName: "",
+            watchName: "",
             categoryIds: [],
-            colorId: undefined
         }
     });
 
     const { handlePagination, pagination, setPagination } = useCustomPagination({ limit: 32, offset: 0, total: 0 });
     //=========Queries=========================
-    const getAllShoesQuery = useQuery(["getAllShoes", pagination.offset, pagination.limit], () => getAllShoesRequest({
+    const getAllWatchQuery = useQuery(["getAllWatch", pagination.offset, pagination.limit], () => getAllWatchRequest({
         limit: pagination.limit,
         offset: pagination.offset,
-        shoesName: searchForm.getValues("shoesName"),
+        watchName: searchForm.getValues("watchName"),
         categoryIds: searchForm.getValues("categoryIds"),
-        colorId: searchForm.getValues("colorId")
     }), {
         select: (data) => data.data,
         onSuccess: (data) => {
             setPagination({ ...pagination, total: data.total });
         }
     });
-    const deleteSelectedQuery = useMutation((ids: string[]) => deleteManyShoesRequest({
+    const deleteSelectedQuery = useMutation((ids: string[]) => deleteManyWatchRequest({
         ids: ids,
         accessToken: session.data?.user?.accessToken
     }), {
         onSuccess: (data, variables) => {
-            getAllShoesQuery.refetch();
+            getAllWatchQuery.refetch();
             enqueueSnackbar(`Đã xoá ${variables.length} phần tử`, { variant: "success" });
         },
         onError: (error) => {
@@ -136,9 +126,6 @@ const ShoesPage: CustomNextPage = () => {
         }
     });
     const getAllCategory = useQuery(["getAllCategory"], () => getAllCategoryRequest({}), {
-        select: (data) => data.data
-    });
-    const getAllColor = useQuery([GetAllColorQueryKey], () => getAllColorRequest({}), {
         select: (data) => data.data
     });
 
@@ -150,8 +137,8 @@ const ShoesPage: CustomNextPage = () => {
         if (deleteSelectedQuery.isLoading) return;
         deleteSelectedQuery.mutate(selectedRows.map((row) => row.toString()));
     }
-    const handleSearchForm: SubmitHandler<ShoesFormInputs> = (e) => {
-        getAllShoesQuery.refetch();
+    const handleSearchForm: SubmitHandler<WatchFormInputs> = (e) => {
+        getAllWatchQuery.refetch();
     }
     return (
         <Box>
@@ -159,12 +146,12 @@ const ShoesPage: CustomNextPage = () => {
                 <Link href="/admin/dashboard" passHref>
                     <MuiLink underline="hover" color="inherit">Dashboard</MuiLink>
                 </Link>
-                <Typography color="text.primary">Giày</Typography>
+                <Typography color="text.primary">Đồng hồ</Typography>
             </Breadcrumbs>
-            <Typography variant="h4" sx={{ fontWeight: "bold", marginBottom: "25px" }}>Quản lý Giày</Typography>
+            <Typography variant="h4" sx={{ fontWeight: "bold", marginBottom: "25px" }}>Quản lý Đồng hồ</Typography>
             <form onSubmit={searchForm.handleSubmit(handleSearchForm)}>
                 <Stack direction={"column"} spacing={2} width={"475px"}>
-                    <TextField fullWidth label="Tên giày" variant="outlined" {...searchForm.register("shoesName")}></TextField>
+                    <TextField fullWidth label="Tên đồng hồ" variant="outlined" {...searchForm.register("watchName")}></TextField>
                     <Controller
                         name="categoryIds"
                         control={searchForm.control}
@@ -186,35 +173,8 @@ const ShoesPage: CustomNextPage = () => {
                             )
                         }
                     />
-                    <Controller
-                        name="colorId"
-                        control={searchForm.control}
-                        render={
-                            ({ field }) => (
-                                <Autocomplete
-                                    
-                                    getOptionLabel={(option: any) => option.colorName}
-                                    filterSelectedOptions
-                                    options={getAllColor.data?.data ?? []}
-                                    renderOption={(params, option)=>(
-                                        <Box component={"li"} {...params}>
-                                            <Box sx={{backgroundColor: option.colorHex, width: "35px", height:"35px", marginRight: "10px"}}></Box>
-                                            <Typography>{option.colorName}</Typography>
-                                        </Box>
-                                    )}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            label="Màu sắc"
-                                        />
-                                    )}
-                                    onChange={(e, option) => field.onChange(option?.colorId)}
-                                />
-                            )
-                        }
-                    />
                     <LoadingButton
-                        loading={getAllShoesQuery.isLoading}
+                        loading={getAllWatchQuery.isLoading}
                         variant="contained" type="submit"
                     >Tìm kiếm</LoadingButton>
                 </Stack>
@@ -223,10 +183,10 @@ const ShoesPage: CustomNextPage = () => {
             <Box sx={{ marginTop: "55px" }}>
                 <CustomDataGrid
                     columns={columns}
-                    rows={getAllShoesQuery.data?.data ?? []}
+                    rows={getAllWatchQuery.data?.data ?? []}
                     pagination={pagination}
-                    error={getAllShoesQuery.isError}
-                    loading={getAllShoesQuery.isLoading}
+                    error={getAllWatchQuery.isError}
+                    loading={getAllWatchQuery.isLoading}
                     getRowId={(row) => row.shoesId}
                     rowHeight={85}
                     onPageChange={handlePagination}
@@ -239,8 +199,8 @@ const ShoesPage: CustomNextPage = () => {
     )
 }
 
-ShoesPage.layout = "manager";
-ShoesPage.auth = {
+WatchPage.layout = "manager";
+WatchPage.auth = {
     role: ["admin", "employee"]
 }
-export default ShoesPage;
+export default WatchPage;

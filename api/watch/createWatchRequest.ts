@@ -3,14 +3,14 @@ import { SHOESMARK_API_DOMAIN } from "../../config/domain";
 import { ApiRequestHandler, RequestWithAuth } from "../../interfaces/ApiRequestHandler";
 import { JsonAction } from "../../interfaces/JsonAction";
 
-interface CreateShoesParam extends RequestWithAuth{
+interface CreateWatchParam extends RequestWithAuth{
     formData: FormData
 }
 
-const createShoesRequest: ApiRequestHandler<CreateShoesParam, JsonAction> = (data)=> axios.post<JsonAction>(SHOESMARK_API_DOMAIN+"/shoes", data.formData, {
+const createWatchRequest: ApiRequestHandler<CreateWatchParam, JsonAction> = (data)=> axios.post<JsonAction>(SHOESMARK_API_DOMAIN+"/watch", data.formData, {
     headers: {
         "Authorization": `Bearer ${data.accessToken}`
     }
 });
 
-export default createShoesRequest;
+export default createWatchRequest;

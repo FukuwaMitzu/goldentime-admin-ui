@@ -3,11 +3,11 @@ import { SHOESMARK_API_DOMAIN } from "../../config/domain"
 import { ApiRequestHandler, RequestWithAuth } from "../../interfaces/ApiRequestHandler"
 import { JsonAction } from "../../interfaces/JsonAction"
 
-interface DeleteManyShoesParam extends RequestWithAuth{
+interface DeleteManyWatchParam extends RequestWithAuth{
     ids: string[]
 }
 
-const deleteManyShoesRequest: ApiRequestHandler<DeleteManyShoesParam, JsonAction> = (data)=> axios.delete<JsonAction>(SHOESMARK_API_DOMAIN+"/shoes",{
+const deleteManyWatchRequest: ApiRequestHandler<DeleteManyWatchParam, JsonAction> = (data)=> axios.delete<JsonAction>(SHOESMARK_API_DOMAIN+"/watch",{
     data:{
         ...data
     },
@@ -15,4 +15,4 @@ const deleteManyShoesRequest: ApiRequestHandler<DeleteManyShoesParam, JsonAction
         "Authorization": `Bearer ${data.accessToken}`
     }
 });
-export default deleteManyShoesRequest;
+export default deleteManyWatchRequest;

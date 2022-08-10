@@ -17,36 +17,31 @@ import Autocomplete from "@mui/material/Autocomplete";
 import InputAdornment from "@mui/material/InputAdornment";
 import LoadingButton from "@mui/lab/LoadingButton";
 import getAllCategoryRequest from "../../../../api/category/getAllCategoryRequest";
-import getAllColorRequest from "../../../../api/color/getAllColorRequest";
 import getAllBrandRequest from "../../../../api/brand/getAllBrandRequest";
 import { CustomNextPage } from "../../../_app";
-import editShoesRequest from "../../../../api/shoes/editShoesRequest";
-import getShoesRequest from "../../../../api/shoes/getShoesRequest";
+import editWatchRequest from "../../../../api/watch/editWatchRequest";
+import getWatchRequest from "../../../../api/watch/getWatchRequest";
 import { SHOESMARK_API_DOMAIN } from "../../../../config/domain";
 import { ApiRequestError } from "../../../../interfaces/ApiRequestError";
 import extractDiff from "../../../../util/extractDiff";
 import { Category } from "../../../../api/category/category";
 import { Brand } from "../../../../api/brand/brand";
-import { Color } from "../../../../api/color/color";
 import sizeList from "../../../../util/sizeFilterList";
 
-type EditShoesFormInputs = {
-    shoesName: string;
+type EditWatchFormInputs = {
+    watchName: string;
     description: string;
-    shoesImage: unknown;
-    UPC: string;
+    watchImage: unknown;
     SKU: string;
     categories: Category[];
     brand?: Brand;
-    color?: Color;
-    size: number;
     price: number;
     importPrice: number;
     sale: number;
     quantity: number;
 }
 
-const DetailShoesPage: CustomNextPage = () => {
+const DetailWatchPage: CustomNextPage = () => {
     const session = useSession();
     const router = useRouter();
 
@@ -56,27 +51,24 @@ const DetailShoesPage: CustomNextPage = () => {
     const imageRef: any = useRef();
 
     //========Queries============================
-    const getShoesQuery = useQuery(["getShoes"], () => getShoesRequest({
+    const getWatchQuery = useQuery(["getWatch"], () => getWatchRequest({
         shoesId: router.query.id as string
     }), {
         refetchOnWindowFocus: false,
         select: (data) => data.data,
         onSuccess: ({ data }) => {
-            editShoesForm.reset(data);
-            imageRef.current.src = SHOESMARK_API_DOMAIN + "/" + data.shoesImage;
+            editWatchForm.reset(data);
+            imageRef.current.src = SHOESMARK_API_DOMAIN + "/" + data.watchImage;
         }
     });
     const getAllCategory = useQuery(["getAllCategory"], () => getAllCategoryRequest({}), {
         select: (data) => data.data
     });
-    const getAllColor = useQuery(["getAllColor"], () => getAllColorRequest({}), {
-        select: (data) => data.data
-    });
     const getAllBrand = useQuery(["getAllBrand"], () => getAllBrandRequest({}), {
         select: (data) => data.data
     });
-    const editShoesQuery = useMutation((data: FormData) => editShoesRequest({
-        shoesId: router.query.id as string,
+    const editWatchQuery = useMutation((data: FormData) => editWatchRequest({
+        watchId: router.query.id as string,
         formData: data,
         accessToken: session.data?.user?.accessToken
     }), {
@@ -89,41 +81,37 @@ const DetailShoesPage: CustomNextPage = () => {
         }
     });
     //======Callbacks==================================
-    const editShoesForm = useForm<EditShoesFormInputs>({
+    const editWatchForm = useForm<EditWatchFormInputs>({
         defaultValues: {
-            shoesName: "",
+            watchName: "",
             importPrice: 0,
             quantity: 0,
             sale: 0,
             SKU: "",
-            UPC: "",
-            size: 0,
             price: 0,
             categories: [],
-            color: { colorHex: "#FFF", colorId: "", colorName: "" },
             brand: { brandId: "", brandName: "" }
         }
     });
 
     const handleCategoryEditDenied = () => {
         setEditMode(false);
-        if (getShoesQuery.data) {
-            const { data } = getShoesQuery.data;
-            editShoesForm.reset();
-            imageRef.current.src = SHOESMARK_API_DOMAIN + "/" + data.shoesImage;
+        if (getWatchQuery.data) {
+            const { data } = getWatchQuery.data;
+            editWatchForm.reset();
+            imageRef.current.src = SHOESMARK_API_DOMAIN + "/" + data.watchImage;
         }
     }
-    const handleEditShoes: SubmitHandler<EditShoesFormInputs> = (data) => {
+    const handleEditShoes: SubmitHandler<EditWatchFormInputs> = (data) => {
         const form = new FormData();
-        if (!getShoesQuery.data) return;
-        const { color, brand, categories, ...diff } = extractDiff(getShoesQuery.data.data, data);
+        if (!getWatchQuery.data) return;
+        const { brand, categories, ...diff } = extractDiff(getWatchQuery.data.data, data);
         for (var key in diff) {
             form.append(key, (data as any)[key]);
         }
-        if (color) form.append("colorId", color.colorId);
         if (brand) form.append("brandId", brand.brandId);
         form.append("categories", JSON.stringify(data.categories.map((category) => category.categoryId)));
-        editShoesQuery.mutate(form);
+        editWatchQuery.mutate(form);
     }
     function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
         if (!event.target.files) return;
@@ -145,18 +133,18 @@ const DetailShoesPage: CustomNextPage = () => {
                 <Link href="/admin/dashboard" passHref>
                     <MuiLink underline="hover" color="inherit">Dashboard</MuiLink>
                 </Link>
-                <Link href="/admin/giay" passHref>
-                    <MuiLink underline="hover" color="inherit">Giày</MuiLink>
+                <Link href="/admin/watch" passHref>
+                    <MuiLink underline="hover" color="inherit">Đồng hồ</MuiLink>
                 </Link>
-                <Typography color="text.primary">Chi tiết Giày</Typography>
+                <Typography color="text.primary">Chi tiết Đồng hồ</Typography>
             </Breadcrumbs>
-            <Typography variant="h4" sx={{ fontWeight: "bold", marginBottom: "25px" }}>Chi tiết Giày</Typography>
-            <form onSubmit={editShoesForm.handleSubmit(handleEditShoes)}>
+            <Typography variant="h4" sx={{ fontWeight: "bold", marginBottom: "25px" }}>Chi tiết Đồng hồ</Typography>
+            <form onSubmit={editWatchForm.handleSubmit(handleEditShoes)}>
                 <Stack direction={"row"} spacing={4}>
                     <Stack spacing={2}>
                         <Controller
-                            name="shoesImage"
-                            control={editShoesForm.control}
+                            name="watchImage"
+                            control={editWatchForm.control}
                             render={({ field }) => (
                                 <Stack direction={"column"} spacing={2} width={"250px"}>
                                     <img width={250} height={250} ref={imageRef} crossOrigin="anonymous"></img>
@@ -173,35 +161,28 @@ const DetailShoesPage: CustomNextPage = () => {
                                 :
                                 <Stack direction={"row"} spacing={1}>
                                     <Button color="error" onClick={handleCategoryEditDenied} fullWidth>Huỷ</Button>
-                                    <LoadingButton loading={editShoesQuery.isLoading} type={"submit"} fullWidth>Lưu</LoadingButton>
+                                    <LoadingButton loading={editWatchQuery.isLoading} type={"submit"} fullWidth>Lưu</LoadingButton>
                                 </Stack>
                         }
                     </Stack>
                     <Stack direction={"column"} spacing={2} width={"475px"}>
                         <Controller
-                            name="shoesName"
-                            control={editShoesForm.control}
+                            name="watchName"
+                            control={editWatchForm.control}
                             render={({ field }) => (
-                                <TextField disabled={!editMode} label={"Tên giày"} {...field}></TextField>
-                            )}
-                        />
-                        <Controller
-                            name="UPC"
-                            control={editShoesForm.control}
-                            render={({ field }) => (
-                                <TextField disabled={!editMode} label={"Mã vạch sản phẩm"} {...field}></TextField>
+                                <TextField disabled={!editMode} label={"Tên đồng hồ"} {...field}></TextField>
                             )}
                         />
                         <Controller
                             name="SKU"
-                            control={editShoesForm.control}
+                            control={editWatchForm.control}
                             render={({ field }) => (
                                 <TextField disabled={!editMode} label={"Mã đơn vị lưu kho"} {...field}></TextField>
                             )}
                         />
                         <Controller
                             name="categories"
-                            control={editShoesForm.control}
+                            control={editWatchForm.control}
                             render={({ field }) => (
                                 <Autocomplete
                                     disabled={!editMode}
@@ -224,7 +205,7 @@ const DetailShoesPage: CustomNextPage = () => {
                         />
                         <Controller
                             name="brand"
-                            control={editShoesForm.control}
+                            control={editWatchForm.control}
                             render={({ field }) => (
                                 <Autocomplete
                                     disabled={!editMode}
@@ -244,61 +225,11 @@ const DetailShoesPage: CustomNextPage = () => {
                             )
                             }
                         />
-                        <Controller
-                            name="color"
-                            control={editShoesForm.control}
-                            render={
-                                ({ field }) => (
-                                    <Autocomplete
-                                        disabled={!editMode}
-                                        getOptionLabel={(option: any) => option.colorName}
-                                        filterSelectedOptions
-                                        {...field}
-                                        isOptionEqualToValue={(option, value) => option.colorId == value.colorId}
-                                        options={getAllColor.data?.data ?? []}
-                                        renderOption={(params, option) => (
-                                            <Box component={"li"} {...params}>
-                                                <Box sx={{ backgroundColor: option.colorHex, width: "35px", height: "35px", marginRight: "10px" }}></Box>
-                                                <Typography>{option.colorName}</Typography>
-                                            </Box>
-                                        )}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                label="Màu sắc"
-                                            />
-                                        )}
-                                        onChange={(e, option) => field.onChange(option)}
-                                    />
-                                )
-                            }
-                        />
                     </Stack>
-                    <Stack spacing={2}>
-                        <Controller
-                            name="size"
-                            control={editShoesForm.control}
-                            render={({ field }) => (
-                                <Autocomplete
-                                    disabled={!editMode}
-                                    filterSelectedOptions
-                                    {...field}
-                                    getOptionLabel={(option) => option.toString()}
-                                    options={sizeList}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            label="Kích cỡ"
-                                        />
-                                    )}
-                                    onChange={(e, option) => field.onChange(option)}
-                                />
-                            )
-                            }
-                        />
+                    <Stack spacing={2}>                  
                         <Controller
                             name="importPrice"
-                            control={editShoesForm.control}
+                            control={editWatchForm.control}
                             render={({ field }) => (
                                 <TextField label={"Đơn giá nhập"}
                                     disabled={!editMode}
@@ -311,7 +242,7 @@ const DetailShoesPage: CustomNextPage = () => {
                         />
                         <Controller
                             name="price"
-                            control={editShoesForm.control}
+                            control={editWatchForm.control}
                             render={({ field }) => (
                                 <TextField label={"Đơn giá bán"}
                                     disabled={!editMode}
@@ -324,7 +255,7 @@ const DetailShoesPage: CustomNextPage = () => {
                         />
                         <Controller
                             name="sale"
-                            control={editShoesForm.control}
+                            control={editWatchForm.control}
                             render={({ field }) => (
                                 <TextField label={"Khuyến mãi"}
                                     disabled={!editMode}
@@ -337,7 +268,7 @@ const DetailShoesPage: CustomNextPage = () => {
                         />
                         <Controller
                             name="quantity"
-                            control={editShoesForm.control}
+                            control={editWatchForm.control}
                             render={({ field }) => (
                                 <TextField label={"Số lượng trong kho"}
                                     disabled={!editMode}
@@ -356,7 +287,7 @@ const DetailShoesPage: CustomNextPage = () => {
                         fullWidth
                         multiline
                         disabled={!editMode}
-                        {...editShoesForm.register("description")}
+                        {...editWatchForm.register("description")}
                         maxRows={20}
                         rows={15}
                     />
@@ -366,9 +297,9 @@ const DetailShoesPage: CustomNextPage = () => {
     )
 }
 
-DetailShoesPage.layout = "manager";
-DetailShoesPage.auth = {
+DetailWatchPage.layout = "manager";
+DetailWatchPage.auth = {
     role: ["admin", "employee"]
 }
-export default DetailShoesPage;
+export default DetailWatchPage;
 

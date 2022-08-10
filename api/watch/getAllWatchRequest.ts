@@ -2,16 +2,15 @@ import axios from "axios";
 import { SHOESMARK_API_DOMAIN } from "../../config/domain";
 import { ApiRequestHandler, RequestWithPagination } from "../../interfaces/ApiRequestHandler";
 import { JsonCollection } from "../../interfaces/JsonCollection";
-import { Shoes } from "./shoes";
+import { Shoes } from "./watch";
 import * as qs from "qs";
 
-export const GetAllShoesQueryKey = "GetAllShoes";
+export const GetAllWatchQueryKey = "GetAllWatch";
 
-interface GetAllShoesParam extends RequestWithPagination{
+interface GetAllWatchParam extends RequestWithPagination{
     ids?: string[]
-    shoesName?: string
+    watchName?: string
     categoryIds?: string[]
-    colorId?:string
     price?: {
         from: number,
         to?: number
@@ -19,7 +18,7 @@ interface GetAllShoesParam extends RequestWithPagination{
 }
 
 
-const getAllShoesRequest: ApiRequestHandler<GetAllShoesParam, JsonCollection<Shoes>> = (data)=> axios.get(SHOESMARK_API_DOMAIN + "/shoes",{
+const getAllWatchRequest: ApiRequestHandler<GetAllWatchParam, JsonCollection<Shoes>> = (data)=> axios.get(SHOESMARK_API_DOMAIN + "/watch",{
     params:{
         ...data
     },
@@ -27,4 +26,4 @@ const getAllShoesRequest: ApiRequestHandler<GetAllShoesParam, JsonCollection<Sho
         return qs.stringify(params, {arrayFormat: 'brackets'})
     }
 });
-export default getAllShoesRequest;
+export default getAllWatchRequest;

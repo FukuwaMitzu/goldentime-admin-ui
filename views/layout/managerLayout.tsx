@@ -28,7 +28,7 @@ export const ManagerLayout: React.FC<ManagerLayoutProps> = ({ children }) => {
             <CssBaseline></CssBaseline>
             <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
                 <Toolbar>
-                    <Typography variant="h6" noWrap>ShoesMark</Typography>
+                    <Typography variant="h6" noWrap>GoldenTime</Typography>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -68,9 +68,8 @@ export const ManagerLayout: React.FC<ManagerLayoutProps> = ({ children }) => {
                             </AccordionSummary>
                             <AccordionDetails>
                                 <List>
-                                    <CustomListItemButton href="/admin/giay">Giày</CustomListItemButton>
+                                    <CustomListItemButton href="/admin/watch">Đồng hồ</CustomListItemButton>
                                     <CustomListItemButton href="/admin/thuong-hieu">Thương hiệu</CustomListItemButton>
-                                    <CustomListItemButton href="/admin/mau-sac">Màu sắc</CustomListItemButton>
                                     <CustomListItemButton href="/admin/the-loai">Thể loại</CustomListItemButton>
                                     <CustomListItemButton href="/admin/nguoi-dung">Người dùng</CustomListItemButton>
                                     <CustomListItemButton href="/admin/thong-bao">Thông báo</CustomListItemButton>

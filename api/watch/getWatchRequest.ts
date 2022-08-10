@@ -2,12 +2,12 @@ import axios from "axios";
 import { SHOESMARK_API_DOMAIN } from "../../config/domain";
 import { ApiRequestHandler} from "../../interfaces/ApiRequestHandler";
 import { JsonEntity } from "../../interfaces/JsonEntity";
-import { Shoes } from "./shoes";
+import { Shoes } from "./watch";
 
-interface GetShoesParam{
+interface GetWatchParam{
     shoesId: string
 }
 
 
-const getShoesRequest: ApiRequestHandler<GetShoesParam, JsonEntity<Shoes>> = (data)=> axios.get(SHOESMARK_API_DOMAIN + "/shoes/" + data.shoesId);
-export default getShoesRequest;
+const getWatchRequest: ApiRequestHandler<GetWatchParam, JsonEntity<Shoes>> = (data)=> axios.get(SHOESMARK_API_DOMAIN + "/watch/" + data.shoesId);
+export default getWatchRequest;
