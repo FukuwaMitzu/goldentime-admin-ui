@@ -44,6 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@rehooks/local-storage", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:2.4.4"],\
             ["@tanstack/react-query", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:4.0.10"],\
             ["@types/axios", "npm:0.14.0"],\
+            ["@types/big.js", "npm:6.1.5"],\
             ["@types/jsonwebtoken", "npm:8.5.8"],\
             ["@types/node", "npm:18.6.1"],\
             ["@types/qs", "npm:6.9.7"],\
@@ -52,6 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.6"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["axios", "npm:0.27.2"],\
+            ["big.js", "npm:6.2.1"],\
             ["chart.js", "npm:3.9.1"],\
             ["class-validator", "npm:0.13.2"],\
             ["dayjs", "npm:1.11.4"],\
@@ -1311,6 +1313,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/big.js", [\
+        ["npm:6.1.5", {\
+          "packageLocation": "./.yarn/cache/@types-big.js-npm-6.1.5-42b14a7218-5eb1472c1f.zip/node_modules/@types/big.js/",\
+          "packageDependencies": [\
+            ["@types/big.js", "npm:6.1.5"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/json5", [\
         ["npm:0.0.29", {\
           "packageLocation": "./.yarn/cache/@types-json5-npm-0.0.29-f63a7916bd-e60b153664.zip/node_modules/@types/json5/",\
@@ -1767,6 +1778,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/balanced-match-npm-1.0.2-a53c126459-9706c088a2.zip/node_modules/balanced-match/",\
           "packageDependencies": [\
             ["balanced-match", "npm:1.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["big.js", [\
+        ["npm:6.2.1", {\
+          "packageLocation": "./.yarn/cache/big.js-npm-6.2.1-7d879136b2-0b234a2fd5.zip/node_modules/big.js/",\
+          "packageDependencies": [\
+            ["big.js", "npm:6.2.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4604,6 +4624,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@rehooks/local-storage", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:2.4.4"],\
             ["@tanstack/react-query", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:4.0.10"],\
             ["@types/axios", "npm:0.14.0"],\
+            ["@types/big.js", "npm:6.1.5"],\
             ["@types/jsonwebtoken", "npm:8.5.8"],\
             ["@types/node", "npm:18.6.1"],\
             ["@types/qs", "npm:6.9.7"],\
@@ -4612,6 +4633,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.6"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["axios", "npm:0.27.2"],\
+            ["big.js", "npm:6.2.1"],\
             ["chart.js", "npm:3.9.1"],\
             ["class-validator", "npm:0.13.2"],\
             ["dayjs", "npm:1.11.4"],\

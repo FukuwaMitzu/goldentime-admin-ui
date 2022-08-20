@@ -38,8 +38,7 @@ import OptionDial, {
 } from "../../../../components/OptionDial/OptionDial";
 import Button from "@mui/material/Button";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import ShoesSearchDialog from "../../../../components/ShoesSearchDialog/ShoesSearchDialog";
-import { Shoes } from "../../../../api/shoes/shoes";
+import ShoesSearchDialog from "../../../../components/WatchSearchDialog/WatchSearchDialog";
 import extractDiff from "../../../../util/extractDiff";
 import { isNotEmptyObject } from "class-validator";
 import editOrderDetailRequest from "../../../../api/order/editOrderDetail";
@@ -48,6 +47,7 @@ import createOrderDetailRequest from "../../../../api/order/createOrderDetail";
 import editOrderRequest from "../../../../api/order/editOrder";
 import LazyDetailOrderItem from "../../../../components/DetailOrderItem/LazyDetailOrderItem";
 import { useSnackbar } from "notistack";
+import { Watch } from "../../../../api/watch/watch";
 
 type QueueTransaction = {
   order?: any;
@@ -78,8 +78,8 @@ interface OrderFormInputs {
 }
 interface TemporaryOrderDetail {
   orderId: string;
-  shoesId: string;
-  shoes: Shoes;
+  watchId: string;
+  watch: Watch;
   quantity: number;
   price: number;
   sale: number;
@@ -237,7 +237,7 @@ const OrderDetailPage: CustomNextPage = () => {
   const handleSubmit: SubmitHandler<OrderFormInputs> = (data) => {};
   const handleChange = (shoesId: string, quantity: number) => {
     const detail = temporaryDetailOrder.find(
-      (detail) => detail.shoesId == shoesId
+      (detail) => detail.watchId == shoesId
     );
     if (detail) {
       detail.quantity = quantity;
@@ -246,7 +246,7 @@ const OrderDetailPage: CustomNextPage = () => {
   };
   const handleDelete = (shoesId: string) => {
     const filter = temporaryDetailOrder.filter(
-      (shoes) => shoes.shoesId != shoesId
+      (shoes) => shoes.watchId != shoesId
     );
     setTemporaryDetailOrder(filter);
   };
@@ -256,9 +256,9 @@ const OrderDetailPage: CustomNextPage = () => {
   const handleCloseShoesSearchDialog = () => {
     setOpenShoesSearchDialog(false);
   };
-  const handleAddShoes = (shoes: Shoes) => {
+  const handleAddShoes = (shoes: Watch) => {
     const index = temporaryDetailOrder.findIndex(
-      (temp) => temp.shoesId == shoes.shoesId
+      (temp) => temp.watchId == shoes.watchId
     );
     if (index > -1) {
       let temp = temporaryDetailOrder[index];
@@ -269,9 +269,9 @@ const OrderDetailPage: CustomNextPage = () => {
     } else if (index == -1) {
       temporaryDetailOrder.unshift({
         orderId: orderForm.getValues("orderId"),
-        shoesId: shoes.shoesId,
+        watchId: shoes.watchId,
         quantity: 1,
-        shoes,
+        watch: shoes,
         price: shoes.price,
         sale: shoes.sale,
       });
@@ -289,7 +289,7 @@ const OrderDetailPage: CustomNextPage = () => {
     let flags: number[] = [];
     let deleteQueue = details?.filter((data, index) => {
       const tempIndex = tempDetails.findIndex(
-        (temp) => temp.shoesId == data.shoesId
+        (temp) => temp.watchId == data.watchId
       );
       if (tempIndex == -1) {
         flags.push(index);
@@ -302,7 +302,7 @@ const OrderDetailPage: CustomNextPage = () => {
     flags = [];
     const addQueue = tempDetails.filter((temp, index) => {
       const detailIndex = details?.findIndex(
-        (data) => data.shoesId == temp.shoesId
+        (data) => data.watchId == temp.watchId
       );
       if (detailIndex == -1) {
         flags.push(index);
@@ -314,7 +314,7 @@ const OrderDetailPage: CustomNextPage = () => {
     );
 
     const updateQueue = tempDetails.filter((data) => {
-      const detail = details?.find((e) => e.shoesId == data.shoesId);
+      const detail = details?.find((e) => e.watchId == data.watchId);
       if (detail) return isNotEmptyObject(extractDiff(data, detail));
       else return false;
     });
@@ -700,8 +700,8 @@ const OrderDetailPage: CustomNextPage = () => {
               {!getOrderQuery.isLoading &&
                 temporaryDetailOrder.map((detail) => (
                   <LazyDetailOrderItem
-                    key={detail.shoesId}
-                    {...detail.shoes}
+                    key={detail.watchId}
+                    {...detail.watch}
                     price={detail.price}
                     sale={detail.sale}
                     buyQuantity={detail.quantity}

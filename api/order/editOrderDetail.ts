@@ -9,7 +9,7 @@ import { OrderDetail } from "./orderDetail";
 
 interface EditOrderDetailParam extends RequestWithAuth {
   orderId: string;
-  shoesId: string;
+  watchId: string;
   quantity?: number;
   sale?: number;
   price?: number;

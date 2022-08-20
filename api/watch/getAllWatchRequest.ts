@@ -15,6 +15,7 @@ interface GetAllWatchParam extends RequestWithPagination{
         from: number,
         to?: number
     }
+    SKU?:string
 }
 
 
