@@ -182,7 +182,7 @@ const CreateWatchPage: CustomNextPage = () => {
                         <TextField label={"Số lượng trong kho"}
                             {...createWatchForm.register("quantity")}
                             InputProps={{
-                                endAdornment: <InputAdornment position="end">Đôi</InputAdornment>
+                                endAdornment: <InputAdornment position="end">Chiếc</InputAdornment>
                             }}
                         ></TextField>
                     </Stack>

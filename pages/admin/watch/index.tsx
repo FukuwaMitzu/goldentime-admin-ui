@@ -28,12 +28,12 @@ import getAllCategoryRequest from "../../../api/category/getAllCategoryRequest";
 const columns: GridColDef[] = [
     {
         field: "watchName",
-        headerName: "Tên giày",
+        headerName: "Tên đồng hồ",
         width: 250
     },
     {
         field: "watchImage",
-        headerName: "Ảnh giày",
+        headerName: "Ảnh đồng hồ",
         width: 100,
         renderCell: (params: GridRenderCellParams<string>) => (
             <Image width={150} height={150} src={GOLDENTIME_API_DOMAIN + "/" + params.value}></Image>
@@ -76,7 +76,7 @@ const columns: GridColDef[] = [
         sortable: false,
         renderCell: (params: GridRenderCellParams<string>) => (
             <Stack>
-                <Link href={`/admin/giay/detail/${params.id}`} passHref><IconButton><LaunchOutlinedIcon></LaunchOutlinedIcon></IconButton></Link>
+                <Link href={`/admin/watch/detail/${params.id}`} passHref><IconButton><LaunchOutlinedIcon></LaunchOutlinedIcon></IconButton></Link>
             </Stack>
         )
     }
@@ -187,7 +187,7 @@ const WatchPage: CustomNextPage = () => {
                     pagination={pagination}
                     error={getAllWatchQuery.isError}
                     loading={getAllWatchQuery.isLoading}
-                    getRowId={(row) => row.shoesId}
+                    getRowId={(row) => row.watchId}
                     rowHeight={85}
                     onPageChange={handlePagination}
                     onCreate={handleCreateShoes}

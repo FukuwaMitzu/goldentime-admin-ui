@@ -273,7 +273,7 @@ const DetailWatchPage: CustomNextPage = () => {
                                     disabled={!editMode}
                                     {...field}
                                     InputProps={{
-                                        endAdornment: <InputAdornment position="end">Đôi</InputAdornment>
+                                        endAdornment: <InputAdornment position="end">Chiếc</InputAdornment>
                                     }}
                                 ></TextField>
                             )}
