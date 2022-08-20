@@ -3,7 +3,7 @@ import axios from "axios";
 import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
 import dayjs from "dayjs";
-import { SHOESMARK_API_DOMAIN } from "../../../config/domain";
+import { GOLDENTIME_API_DOMAIN } from "../../../config/domain";
 import { signOut } from "next-auth/react";
 
 function extractUserData(token:string){
@@ -18,7 +18,7 @@ function extractUserData(token:string){
 
 async function refreshToken(refreshToken: string){
     try{
-        const request = await axios.post(SHOESMARK_API_DOMAIN + "/auth/refresh", {
+        const request = await axios.post(GOLDENTIME_API_DOMAIN + "/auth/refresh", {
             refreshToken
         }, { headers: {"Content-Type":"application/json"}});
         if(request.status==201){
@@ -41,7 +41,7 @@ export default NextAuth({
             },
             async authorize(credentials, req){
                 try{
-                    const request = await axios.post(SHOESMARK_API_DOMAIN + "/auth/login", {
+                    const request = await axios.post(GOLDENTIME_API_DOMAIN + "/auth/login", {
                         username: credentials?.username,
                         email: credentials?.username,
                         password: credentials?.password

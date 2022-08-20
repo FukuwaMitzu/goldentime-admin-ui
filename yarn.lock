@@ -1336,6 +1336,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chart.js@npm:^3.9.1":
+  version: 3.9.1
+  resolution: "chart.js@npm:3.9.1"
+  checksum: 9ab0c0ac01215af0b3f020f2e313030fd6e347b48ed17d5484ee9c4e8ead45e78ae71bea16c397621c386b409ce0b14bf17f9f6c2492cd15b56c0f433efdfff6
+  languageName: node
+  linkType: hard
+
 "class-validator@npm:^0.13.2":
   version: 0.13.2
   resolution: "class-validator@npm:0.13.2"
@@ -3221,6 +3228,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-chartjs-2@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "react-chartjs-2@npm:4.3.1"
+  peerDependencies:
+    chart.js: ^3.5.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 574d12cc43b9b4a0f1e04cc692982e16ef7083c03da2a8a9fc2180fe9bcadc793008f81d8f4eec5465925eff84c95d7c523cb74376858b363ae75a83bb3c2a5d
+  languageName: node
+  linkType: hard
+
 "react-color@npm:^2.19.3":
   version: 2.19.3
   resolution: "react-color@npm:2.19.3"
@@ -3531,6 +3548,7 @@ __metadata:
     "@types/react-dom": 18.0.6
     "@types/uuid": ^8.3.4
     axios: ^0.27.2
+    chart.js: ^3.9.1
     class-validator: ^0.13.2
     dayjs: ^1.11.4
     eslint: 8.20.0
@@ -3542,6 +3560,7 @@ __metadata:
     notistack: ^2.0.5
     qs: ^6.11.0
     react: 18.2.0
+    react-chartjs-2: ^4.3.1
     react-color: ^2.19.3
     react-dom: 18.2.0
     react-hook-form: ^7.34.0

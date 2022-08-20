@@ -52,6 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.6"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["axios", "npm:0.27.2"],\
+            ["chart.js", "npm:3.9.1"],\
             ["class-validator", "npm:0.13.2"],\
             ["dayjs", "npm:1.11.4"],\
             ["eslint", "npm:8.20.0"],\
@@ -63,6 +64,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["notistack", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:2.0.5"],\
             ["qs", "npm:6.11.0"],\
             ["react", "npm:18.2.0"],\
+            ["react-chartjs-2", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:4.3.1"],\
             ["react-color", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:2.19.3"],\
             ["react-dom", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:18.2.0"],\
             ["react-hook-form", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:7.34.0"],\
@@ -1845,6 +1847,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chalk", "npm:4.1.2"],\
             ["ansi-styles", "npm:4.3.0"],\
             ["supports-color", "npm:7.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["chart.js", [\
+        ["npm:3.9.1", {\
+          "packageLocation": "./.yarn/cache/chart.js-npm-3.9.1-931bfaba91-9ab0c0ac01.zip/node_modules/chart.js/",\
+          "packageDependencies": [\
+            ["chart.js", "npm:3.9.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4187,6 +4198,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["react-chartjs-2", [\
+        ["npm:4.3.1", {\
+          "packageLocation": "./.yarn/cache/react-chartjs-2-npm-4.3.1-467e2ad798-574d12cc43.zip/node_modules/react-chartjs-2/",\
+          "packageDependencies": [\
+            ["react-chartjs-2", "npm:4.3.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:4.3.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-chartjs-2-virtual-6a59692d5b/0/cache/react-chartjs-2-npm-4.3.1-467e2ad798-574d12cc43.zip/node_modules/react-chartjs-2/",\
+          "packageDependencies": [\
+            ["react-chartjs-2", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:4.3.1"],\
+            ["@types/chart.js", null],\
+            ["@types/react", "npm:18.0.15"],\
+            ["chart.js", "npm:3.9.1"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/chart.js",\
+            "@types/react",\
+            "chart.js",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["react-color", [\
         ["npm:2.19.3", {\
           "packageLocation": "./.yarn/cache/react-color-npm-2.19.3-d63f96d772-40b49e1aa2.zip/node_modules/react-color/",\
@@ -4575,6 +4612,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.6"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["axios", "npm:0.27.2"],\
+            ["chart.js", "npm:3.9.1"],\
             ["class-validator", "npm:0.13.2"],\
             ["dayjs", "npm:1.11.4"],\
             ["eslint", "npm:8.20.0"],\
@@ -4586,6 +4624,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["notistack", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:2.0.5"],\
             ["qs", "npm:6.11.0"],\
             ["react", "npm:18.2.0"],\
+            ["react-chartjs-2", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:4.3.1"],\
             ["react-color", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:2.19.3"],\
             ["react-dom", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:18.2.0"],\
             ["react-hook-form", "virtual:4c5034b83796bb934637eb164f58e9f2941d66a4c944b0e735df53bea9d1870eccd35d7d74cda93eacaa51fbce19864245c324fcda7061608fef0fe2f1e9e857#npm:7.34.0"],\

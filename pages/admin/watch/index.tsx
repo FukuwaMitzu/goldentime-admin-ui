@@ -15,7 +15,7 @@ import useCustomPagination from "../../../components/CustomPagination/hooks/useC
 import getAllWatchRequest from "../../../api/watch/getAllWatchRequest";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import { SHOESMARK_API_DOMAIN } from "../../../config/domain";
+import { GOLDENTIME_API_DOMAIN } from "../../../config/domain";
 import dayjs from "dayjs";
 import deleteManyWatchRequest from "../../../api/watch/deleteManyWatchRequest";
 import { useSnackbar } from "notistack";
@@ -36,7 +36,7 @@ const columns: GridColDef[] = [
         headerName: "Ảnh giày",
         width: 100,
         renderCell: (params: GridRenderCellParams<string>) => (
-            <Image width={150} height={150} src={SHOESMARK_API_DOMAIN + "/" + params.value}></Image>
+            <Image width={150} height={150} src={GOLDENTIME_API_DOMAIN + "/" + params.value}></Image>
         )
     },
     {

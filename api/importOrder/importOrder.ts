@@ -1,11 +1,11 @@
-import { Shoes } from "../watch/watch";
+import { Watch } from "../watch/watch";
 import { User } from "../user/user";
 
 interface ImportOrderDetail {
     importOrderId: string;
     shoesId: string;
     importOrder: ImportOrder | {importOrderId:string};
-    shoes: Shoes;
+    shoes: Watch;
     quantity: number;
 }
 export interface ImportOrder {

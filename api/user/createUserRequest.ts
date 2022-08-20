@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SHOESMARK_API_DOMAIN } from "../../config/domain";
+import { GOLDENTIME_API_DOMAIN } from "../../config/domain";
 import { ApiRequestHandler, RequestWithAuth } from "../../interfaces/ApiRequestHandler";
 import { JsonEntity } from "../../interfaces/JsonEntity";
 import { User } from "./user";
@@ -19,7 +19,7 @@ export interface CreateUserParam extends RequestWithAuth{
     address: string;
 }
 
-const createUserRequest: ApiRequestHandler<CreateUserParam, JsonEntity<User>> = ({accessToken, ...data})=> axios.post(SHOESMARK_API_DOMAIN+"/user", {
+const createUserRequest: ApiRequestHandler<CreateUserParam, JsonEntity<User>> = ({accessToken, ...data})=> axios.post(GOLDENTIME_API_DOMAIN+"/user", {
     ...data
 }, {
     headers: {

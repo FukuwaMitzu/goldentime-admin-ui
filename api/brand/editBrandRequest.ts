@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SHOESMARK_API_DOMAIN } from "../../config/domain";
+import { GOLDENTIME_API_DOMAIN } from "../../config/domain";
 import { ApiRequestHandler, RequestWithAuth } from "../../interfaces/ApiRequestHandler";
 import { JsonEntity } from "../../interfaces/JsonEntity";
 import { Brand } from "./brand";
@@ -9,7 +9,7 @@ interface EditBrandParam extends RequestWithAuth{
     brandName?: string
 }
 
-const editBrandRequest: ApiRequestHandler<EditBrandParam, JsonEntity<Brand>> = (data)=> axios.put(SHOESMARK_API_DOMAIN+`/brand/${data.brandId}`, {
+const editBrandRequest: ApiRequestHandler<EditBrandParam, JsonEntity<Brand>> = (data)=> axios.put(GOLDENTIME_API_DOMAIN+`/brand/${data.brandId}`, {
     brandName: data.brandName,
 }, {
     headers: {

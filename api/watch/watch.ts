@@ -1,9 +1,9 @@
 import { Brand } from "../brand/brand";
 import {Category} from "../category/category";
 
-export interface Shoes{
-  shoesId: string;
-  shoesName: string;
+export interface Watch{
+  watchId: string;
+  watchName: string;
   description: string;
   watchImage: string;
   SKU: string;

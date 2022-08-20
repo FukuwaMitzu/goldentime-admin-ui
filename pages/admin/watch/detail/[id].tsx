@@ -21,12 +21,11 @@ import getAllBrandRequest from "../../../../api/brand/getAllBrandRequest";
 import { CustomNextPage } from "../../../_app";
 import editWatchRequest from "../../../../api/watch/editWatchRequest";
 import getWatchRequest from "../../../../api/watch/getWatchRequest";
-import { SHOESMARK_API_DOMAIN } from "../../../../config/domain";
+import { GOLDENTIME_API_DOMAIN } from "../../../../config/domain";
 import { ApiRequestError } from "../../../../interfaces/ApiRequestError";
 import extractDiff from "../../../../util/extractDiff";
 import { Category } from "../../../../api/category/category";
 import { Brand } from "../../../../api/brand/brand";
-import sizeList from "../../../../util/sizeFilterList";
 
 type EditWatchFormInputs = {
     watchName: string;
@@ -58,7 +57,7 @@ const DetailWatchPage: CustomNextPage = () => {
         select: (data) => data.data,
         onSuccess: ({ data }) => {
             editWatchForm.reset(data);
-            imageRef.current.src = SHOESMARK_API_DOMAIN + "/" + data.watchImage;
+            imageRef.current.src = GOLDENTIME_API_DOMAIN + "/" + data.watchImage;
         }
     });
     const getAllCategory = useQuery(["getAllCategory"], () => getAllCategoryRequest({}), {
@@ -99,7 +98,7 @@ const DetailWatchPage: CustomNextPage = () => {
         if (getWatchQuery.data) {
             const { data } = getWatchQuery.data;
             editWatchForm.reset();
-            imageRef.current.src = SHOESMARK_API_DOMAIN + "/" + data.watchImage;
+            imageRef.current.src = GOLDENTIME_API_DOMAIN + "/" + data.watchImage;
         }
     }
     const handleEditShoes: SubmitHandler<EditWatchFormInputs> = (data) => {

@@ -1,8 +1,8 @@
 import axios from "axios";
-import { SHOESMARK_API_DOMAIN } from "../../config/domain";
+import { GOLDENTIME_API_DOMAIN } from "../../config/domain";
 import { ApiRequestHandler, RequestWithPagination } from "../../interfaces/ApiRequestHandler";
 import { JsonCollection } from "../../interfaces/JsonCollection";
-import { Shoes } from "./watch";
+import { Watch } from "./watch";
 import * as qs from "qs";
 
 export const GetAllWatchQueryKey = "GetAllWatch";
@@ -18,7 +18,7 @@ interface GetAllWatchParam extends RequestWithPagination{
 }
 
 
-const getAllWatchRequest: ApiRequestHandler<GetAllWatchParam, JsonCollection<Shoes>> = (data)=> axios.get(SHOESMARK_API_DOMAIN + "/watch",{
+const getAllWatchRequest: ApiRequestHandler<GetAllWatchParam, JsonCollection<Watch>> = (data)=> axios.get(GOLDENTIME_API_DOMAIN + "/watch",{
     params:{
         ...data
     },
